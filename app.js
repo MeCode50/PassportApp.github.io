@@ -5,10 +5,15 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const patientsRouter = require('./routes/patients');
+const statusRouter = require('./routes/status');
 
 
 // Basic express server
 const app = express();
+
+// serving public files
+app.use(express.static(__dirname + '/public'));
 
 // passport config 
 require('./config/passport')(passport );
@@ -58,6 +63,12 @@ app.use((req, res, next) => {
 // Routes
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
+
+
+
+app.use('/register-patient', patientsRouter); // Assuming '/patients' is your patients-related routes
+app.use('/status', statusRouter); 
+
 
 const PORT = process.env.PORT || 5000;
 

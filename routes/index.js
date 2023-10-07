@@ -7,11 +7,17 @@ const router = express.Router();
 // create a router
 router.get('/', (req, res) => res.render('welcome'));
 
-// dashboard
-router.get('/dashboard', ensureAuthenticated, (req, res) => {
-  res.render('dashboard', {
+// render the patient reg page 
+router.get('/register-patient', ensureAuthenticated, (req, res) => {
+  res.render('register-patient', {
     name: req.user.name // Pass the user object to the view
   });
 });
 
+
+
+
 module.exports = router;
+
+
+
